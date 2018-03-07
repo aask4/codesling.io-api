@@ -21,7 +21,7 @@ import {
 } from '../../lib/SQL';
 
 const setup = async () => {
-  await dropDatabase();
+  //await dropDatabase();
   await dropUsersChallengesTable();
   await dropHistoryTable();
   await dropTestCaseTable();
@@ -30,7 +30,7 @@ const setup = async () => {
   await dropUserTable();
   await dropChallengeTable();
   // await dropSabotageTable();
-  await createDatabase();
+  //await createDatabase();
   await createUserTable();
   await createChallengeTable();
   await createHistoryTable();
