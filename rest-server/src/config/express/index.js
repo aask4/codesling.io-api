@@ -2,6 +2,7 @@ import express from 'express';
 import parser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
+import passport from 'passport'
 
 import router from '../../routes/index';
 
@@ -13,6 +14,7 @@ const middleWare = [
     allowedHeaders: 'Content-Type, authorization',
     methods: ['GET, POST, PUT, DELETE', 'OPTIONS'],
   }),
+  passport.initialize()
 ];
 
 class App {

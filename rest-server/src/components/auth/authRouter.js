@@ -1,6 +1,6 @@
 import express from 'express';
 import validate from 'express-validation';
-import passport from 'passport';
+import passport from '../../middleware/validation/passport';
 
 import {
   signUpController,
@@ -15,6 +15,6 @@ router.route('/signup')
   .post(validate(formValidation.signUp), signUpController);
 
 router.route('/login')
-  .post(validate(formValidation.login), passport.authenticate('local', { session: false}), loginController);
+  .post(validate(formValidation.login), passport.authenticate('jwt', { session: false}), loginController);
 
 export default router;
