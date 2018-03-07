@@ -21,6 +21,7 @@ export const serverInitialState = ({ client, room }, payload) => {
 };
 
 export const serverChanged = ({ io, room }) => {
+  console.log('***** emitting server.changed');
   const roomId = room.get('id');
   const text = room.get('text');
   const email = room.get('email');
