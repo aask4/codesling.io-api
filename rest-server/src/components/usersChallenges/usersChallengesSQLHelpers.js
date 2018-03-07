@@ -11,6 +11,9 @@ export const fetchAllUserChallengesHelper = ({ user_id }) => {
     FROM challenges AS c
       INNER JOIN usersChallenges AS uc
       ON (c.id=uc.challenge_id)
-      WHERE (uc.user_id=${user_id})
+
   `;
 };
+
+// removed from line 14
+// WHERE (uc.user_id=${user_id})
