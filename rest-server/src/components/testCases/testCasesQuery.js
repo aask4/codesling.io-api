@@ -19,9 +19,9 @@ export const addTestCaseQuery = async (body) => {
   }
 };
 
-export const fetchTestCaseQuery = async (body) => {
+export const fetchTestCaseQuery = async (params) => {
   try {
-    const queryString = fetchTestCaseHelper(body);
+    const queryString = fetchTestCaseHelper(params);
     const data = db.queryAsync(queryString);
     success('fetchTestCaseQuery - successfully fetched test case ', data);
     return data;
