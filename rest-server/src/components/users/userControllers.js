@@ -16,6 +16,7 @@ export const fetchAllUserController = async (req, res) => {
     return res.status(200).send(data);
   } catch (err) {
     error('fetchAllUserController - error= ', err);
+    res.status(404).send(err)
   }
 };
 
@@ -25,7 +26,8 @@ export const fetchUserController = async (req, res) => {
     success('fetchUserController - successfully fetched data ', data);
     return res.status(200).send(data)
   } catch (err) {
-    error('fetchUserController - error= ', err)
+    error('fetchUserController - error= ', err);
+    res.status(404).send(err)
   }
 }
 
@@ -35,5 +37,6 @@ export const updateUserController = async (req, res) => {
     return res.status(201).send(userInfo);
   } catch (err) {
     error('updateUserController - error= ', error);
+    res.status(404).send(err)
   }
 };

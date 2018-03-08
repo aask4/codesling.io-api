@@ -17,7 +17,7 @@ export const fetchAllUserQuery = async () => {
     return data;
   } catch (err) {
     error('fetchAllUserQuery - error= ', err);
-    throw new Error(err);
+    res.status(404).send(err)
   }
 };
 
@@ -29,6 +29,7 @@ export const fetchUserQuery = async ({user_id}) => {
     return data;
   } catch (err) {
     error('fetchUserQuery - error= ', err);
+    res.status(404).send(err)
   }
 }
 
@@ -39,6 +40,7 @@ export const updateUser = async ({user_id, clout, kdr_change}) => {
     success('updateUser - successfully updated user data ', data);
     return data;
   } catch (err) {
-    error('updateUser - error= ', err)
+    error('updateUser - error= ', err);
+    res.status(404).send(err)
   }
 }

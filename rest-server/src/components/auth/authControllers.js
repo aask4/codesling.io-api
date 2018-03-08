@@ -25,6 +25,7 @@ export const signUpController = async (req, res) => {
     return res.status(200).append('authorization', JSON.stringify(token)).send(rows[0]);
   } catch (err) {
     error('signUpController - error= ', err);
+    res.status(404).send(err)
   }
 };
 
@@ -39,5 +40,6 @@ export const loginController = async (req, res) => {
     return res.status(200).append('authorization', JSON.stringify(token)).send(rows[0]);
   } catch (err) {
     error('loginController - error= ', err);
+    res.status(404).send(err)
   }
 };

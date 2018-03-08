@@ -17,7 +17,7 @@ export const signUpQuery = async (body) => {
     return data;
   } catch (err) {
     error('signUpQuery - error= ', err);
-    throw new Error(err);
+    res.status(404).send(err)
   }
 };
 
@@ -30,5 +30,6 @@ export const loginQuery = async (body) => {
     return data;
   } catch (err) {
     error('loginQuery - error= ', err);
+    res.status(404).send(err)
   }
 }
