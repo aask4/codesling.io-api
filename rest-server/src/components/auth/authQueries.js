@@ -30,6 +30,5 @@ export const loginQuery = async (body) => {
     return data;
   } catch (err) {
     error('loginQuery - error= ', err);
-    throw new Error(err);
   }
 }
