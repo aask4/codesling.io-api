@@ -19,7 +19,7 @@ export const addTestCaseController = async (req, res) => {
 
 export const fetchTestCaseController = async (req, res) => {
   try {
-    const data = await fetchTestCaseQuery(req.query);
+    const data = await fetchTestCaseQuery(req.params);
     success('fetchTestCaseController - successfully fetched test case ', data);
     return res.status(200).send(data);
   } catch (err) {

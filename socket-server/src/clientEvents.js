@@ -42,9 +42,10 @@ const clientRun = async ({ io, room }, payload) => {
   success('running code from client. room.get("text") = ', room.get('text'));
   const { text, email, challenge_id } = payload;
   const url = process.env.CODERUNNER_SERVICE_URL;
-  // const testCase = await axios.get('http://localhost:3396/api/testCases', { challenge_id });
+  const testCase = await axios.get(`http://localhost:3396/api/testCases/${challenge_id}`);
+  const input = text + testCase.data.rows[0].content;
   try {
-    const { data } = await axios.post(`${url}/submit-code`, { code: text });
+    const { data } = await axios.post(`${url}/submit-code`, { code: input });
     const stdout = data;
     serverRun({ io, room }, { stdout, email });
   } catch (e) {
