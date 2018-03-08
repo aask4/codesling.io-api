@@ -4,9 +4,9 @@ import { addTestCaseController } from "../testCases/testCasesControllers";
 
 export const addOpenDuelController = async (req, res) => {
   try {
-    const data = await addOpenDuelQuery(req.body);
-    success('addOpenDuelController - successfully added open duel ', data);
-    return res.status(200).send(data);
+    const {rows} = await addOpenDuelQuery(req.body);
+    success('addOpenDuelController - successfully added open duel ', rows[0]);
+    return res.status(200).send(rows[0]);
   } catch (err) {
     error('addOpenDuelController - error=', err);
   }
@@ -14,9 +14,10 @@ export const addOpenDuelController = async (req, res) => {
 
 export const fetchOpenDuelController = async (req, res) => {
   try {
-    const data = await fetchOpenDuelQuery(req.query);
-    success('fetchOpenDuelController - successfully fetched open duel ', data);
-    return res.status(200).send(data);
+    const {rows} = await fetchOpenDuelQuery(req.query);
+    console.log('fetchOpenDuelController >>>> ', rows)
+    success('fetchOpenDuelController - successfully fetched open duel ', rows);
+    return res.status(200).send(rows);
   } catch (err) {
     error("fetchOpenDuelController - error=", err);
   }
