@@ -53,3 +53,10 @@ export const serverJoined = ({io, room}) => {
     .in(room.get('id'))
     .emit('server.joined');
 };
+
+export const serverDuelChat = ({ io, room }, message) => {
+  io
+    .in(room.get('id'))
+    .emit('server.duelChat', message);
+};
+
