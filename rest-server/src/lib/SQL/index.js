@@ -67,7 +67,8 @@ export const createUserTable = async () => {
       username VARCHAR(255) NOT NULL,
       password VARCHAR(255) NOT NULL,
       clout INT,
-      kdr INT,
+      kills INT,
+      deaths INT,
       CONSTRAINT users_pk 
         PRIMARY KEY(id)
       )
