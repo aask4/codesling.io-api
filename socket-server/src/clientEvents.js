@@ -7,7 +7,8 @@ import {
   serverLeave,
   serverRun,
   serverMessage,
-  serverDuelChat,
+  serverJoined,
+  serverDuelChat
 } from './serverEvents';
 
 /**
@@ -77,12 +78,18 @@ const clientDuelChat = async ({ io, room }, payload) => {
   }
 };
 
+const clientOpponent = async ({io, room}) => {
+  console.log('WE ARE HERE WE ARE HERE')
+  serverJoined({io, room});
+}
+
 const clientEmitters = {
   'client.ready': clientReady,
   'client.update': clientUpdate,
   'client.disconnect': clientDisconnect,
   'client.run': clientRun,
   'client.message': clientMessage,
+  'client.opponent': clientOpponent,
   'client.duelChat': clientDuelChat,
 };
 

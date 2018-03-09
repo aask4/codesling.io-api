@@ -47,8 +47,16 @@ export const serverMessage = ({ io, room }, message) => {
     .emit('server.message', message);
 };
 
+export const serverJoined = ({io, room}) => {
+  console.log('US TOO US TOO')
+  io
+    .in(room.get('id'))
+    .emit('server.joined');
+};
+
 export const serverDuelChat = ({ io, room }, message) => {
   io
     .in(room.get('id'))
     .emit('server.duelChat', message);
 };
+

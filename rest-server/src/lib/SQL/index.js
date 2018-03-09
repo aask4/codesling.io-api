@@ -10,7 +10,7 @@ const database = process.env.NODE_ENV === 'production' ? process.env.AWS_DATABAS
 
 /**
  * SQL statements for syncing and dropping tables
- * 
+ *
  * Database
  * Users
  * Challenges
@@ -64,7 +64,7 @@ export const createUserTable = async () => {
       (
       id SERIAL,
       email VARCHAR(255) UNIQUE NOT NULL,
-      username VARCHAR(255) NOT NULL,
+      username VARCHAR(255) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
       clout INT,
       kills INT,
@@ -100,11 +100,11 @@ export const createChallengeTable = async () => {
       CREATE TABLE IF NOT EXISTS challenges
       (
         id SERIAL,
-        title VARCHAR(255) NOT NULL,
+        title VARCHAR(255) UNIQUE NOT NULL,
         content VARCHAR(255) NOT NULL,
         difficulty INT NOT NULL,
         rating INT,
-        CONSTRAINT challenges_pk 
+        CONSTRAINT challenges_pk
           PRIMARY KEY(id)
       )
       `
@@ -178,15 +178,15 @@ export const createHistoryTable = async () => {
         user_id INT NOT NULL,
         challenger_id INT NOT NULL,
         challenge_id INT NOT NULL,
-        CONSTRAINT histories_pk 
+        CONSTRAINT histories_pk
           PRIMARY KEY(id),
-        CONSTRAINT fk_histories_user_id 
+        CONSTRAINT fk_histories_user_id
           FOREIGN KEY(user_id) REFERENCES users(id)
           ON DELETE CASCADE,
-        CONSTRAINT fk_histories_challenger_id 
+        CONSTRAINT fk_histories_challenger_id
           FOREIGN KEY(challenger_id) REFERENCES users(id)
           ON DELETE CASCADE,
-        CONSTRAINT fk_histories_challenge_id 
+        CONSTRAINT fk_histories_challenge_id
           FOREIGN KEY(challenge_id) REFERENCES challenges(id)
           ON DELETE CASCADE
       )
@@ -222,7 +222,7 @@ export const createTestCaseTable = async () => {
         challenge_id INT NOT NULL,
         CONSTRAINT testCases_pk
           PRIMARY KEY(id),
-        CONSTRAINT fk_testCases_challenge_id 
+        CONSTRAINT fk_testCases_challenge_id
           FOREIGN KEY(challenge_id) REFERENCES challenges(id)
           ON DELETE CASCADE
       )
@@ -353,5 +353,39 @@ export const dropMessageTable = async () => {
     success('successfully dropped messages table');
   } catch (err) {
     error('error dropping messages table ', err);
+  }
+};
+
+export const createOpenDuelsTable = async () => {
+  try {
+    await db.queryAsync(
+      `
+        CREATE TABLE IF NOT EXISTS openduels
+        (
+          duel_id SERIAL PRIMARY KEY,
+          challenger_id INT NOT NULL,
+          opponent_id INT,
+          challenge_id INT NOT NULL,
+          sling_id VARCHAR(255) NOT NULL,
+          FOREIGN KEY(challenge_id) REFERENCES challenges(id),
+          FOREIGN KEY(challenger_id) REFERENCES users(id),
+          FOREIGN KEY(opponent_id) REFERENCES users(id)
+        )
+      `
+    )
+    success('successfully created openduels table');
+  } catch (err) {
+    error('error creating openduels table ', err);
+  }
+};
+
+export const dropOpenDuelsTable = async () => {
+  try {
+    await db.queryAsync(
+      `DROP TABLE IF EXISTS openduels`
+    )
+    success('successfully dropped openduels table');
+  } catch (err) {
+    error('error dropping openduels table ', err);
   }
 };
