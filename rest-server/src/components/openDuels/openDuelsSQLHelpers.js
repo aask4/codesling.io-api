@@ -21,11 +21,3 @@ export const removeOpenDuelHelper = ({duel_id}) => {
   `;
 };
 
-export const updateOpenDuelHelper = ({duel_id, opponent_id}) => {
-  return `
-    UPDATE openduels
-    SET opponent_id = '${opponent_id}'
-    WHERE duel_id = '${duel_id}'
-    RETURNING *
-  `
-};
