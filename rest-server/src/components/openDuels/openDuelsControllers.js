@@ -1,4 +1,9 @@
-import { addOpenDuelQuery, fetchOpenDuelQuery, removeOpenDuelQuery } from "./openDuelsQuery";
+import {
+  addOpenDuelQuery,
+  fetchOpenDuelQuery,
+  removeOpenDuelQuery,
+  updateOpenDuelQuery
+ } from "./openDuelsQuery";
 import { success, error } from "../../lib/log";
 import { addTestCaseController } from "../testCases/testCasesControllers";
 
@@ -25,10 +30,21 @@ export const fetchOpenDuelController = async (req, res) => {
 
 export const removeOpenDuelController = async (req, res) => {
   try {
-    const data = await removeOpenDuelQuery(req.query);
+    const data = await removeOpenDuelQuery(req.body);
     success('removeOpenDuelController - successfully removed open duel ', data);
     return res.status(200).send(data);
   } catch (err) {
     error("removeOpenDuelController - error=", err);
+  }
+}
+
+export const updateOpenDuelController = async (req, res) => {
+  try {
+    const {rows} = await updateOpenDuelQuery(req.query);
+    console.log("UPDATE OPEN DUEL CONTROLLER _______ ", rows);
+    success("updateOpenDuelController - successfully updated open duel ", rows);
+    return res.status(200).send(rows[0]);
+  } catch (err) {
+    error("updateOpenDuelController - error=", err);
   }
 }

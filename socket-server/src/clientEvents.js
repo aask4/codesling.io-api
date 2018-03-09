@@ -7,6 +7,7 @@ import {
   serverLeave,
   serverRun,
   serverMessage,
+  serverJoined
 } from './serverEvents';
 
 /**
@@ -63,12 +64,18 @@ const clientMessage = async ({ io, room }, payload) => {
   }
 };
 
+const clientOpponent = async ({io, room}) => {
+  console.log('WE ARE HERE WE ARE HERE')
+  serverJoined({io, room});
+}
+
 const clientEmitters = {
   'client.ready': clientReady,
   'client.update': clientUpdate,
   'client.disconnect': clientDisconnect,
   'client.run': clientRun,
   'client.message': clientMessage,
+  'client.opponent': clientOpponent,
 };
 
 export default clientEmitters;

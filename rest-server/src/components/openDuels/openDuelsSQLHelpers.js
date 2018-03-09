@@ -14,10 +14,19 @@ export const fetchOpenDuelHelper = () => {
   `;
 };
 
-export const removeOpenDuelHelpler = ({duel_id}) => {
+export const removeOpenDuelHelper = ({duel_id}) => {
   return `
     DELETE FROM openduels
-    WHERE id=${duel_id}
+    WHERE duel_id=${duel_id}
     RETURNING challenge_id, challenger_id, opponent_id
   `;
+};
+
+export const updateOpenDuelHelper = ({duel_id, opponent_id}) => {
+  return `
+    UPDATE openduels
+    SET opponent_id = '${opponent_id}'
+    WHERE duel_id = '${duel_id}'
+    RETURNING *
+  `
 };

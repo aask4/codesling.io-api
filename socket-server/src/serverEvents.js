@@ -46,3 +46,10 @@ export const serverMessage = ({ io, room }, message) => {
     .in(room.get('id'))
     .emit('server.message', message);
 };
+
+export const serverJoined = ({io, room}) => {
+  console.log('US TOO US TOO')
+  io
+    .in(room.get('id'))
+    .emit('server.joined');
+};

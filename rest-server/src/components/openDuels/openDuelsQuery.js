@@ -1,5 +1,10 @@
 import db from "../../config/database";
-import { addOpenDuelHelper, fetchOpenDuelHelper, removeOpenDuelHelper } from "./openDuelsSQLHelpers";
+import {
+  addOpenDuelHelper,
+  fetchOpenDuelHelper,
+  removeOpenDuelHelper,
+  updateOpenDuelHelper
+} from "./openDuelsSQLHelpers";
 import { success, error } from "../../lib/log";
 
 export const addOpenDuelQuery = async (body) => {
@@ -34,3 +39,14 @@ export const removeOpenDuelQuery = async (body) => {
     error("removeOpenDuelQuery - error=", err);
   }
 };
+
+export const updateOpenDuelQuery = async (body) => {
+  try {
+    const queryString = updateOpenDuelHelper(body);
+    const data = db.queryAsync(queryString);
+    success("updateOpenDuelQuery - successfully updated open duel ", data);
+    return data;
+  } catch (err) {
+    error("updateOpenDuelQuery - error=", err);
+  }
+}

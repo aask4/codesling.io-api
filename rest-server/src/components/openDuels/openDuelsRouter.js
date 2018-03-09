@@ -3,7 +3,8 @@ import express from "express";
 import {
   addOpenDuelController,
   fetchOpenDuelController,
-  removeOpenDuelController
+  removeOpenDuelController,
+  updateOpenDuelController
 } from "./openDuelsControllers";
 
 const router = express.Router();
@@ -12,6 +13,7 @@ router
   .route("/")
   .get(fetchOpenDuelController)
   .post(addOpenDuelController)
-  .delete(removeOpenDuelController);
+  .delete(removeOpenDuelController)
+  .put(updateOpenDuelController);
 
 export default router;

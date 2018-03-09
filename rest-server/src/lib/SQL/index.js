@@ -363,7 +363,7 @@ export const createOpenDuelsTable = async () => {
         (
           duel_id SERIAL PRIMARY KEY,
           challenger_id INT NOT NULL,
-          opponent_id INT NULL,
+          opponent_id INT,
           challenge_id INT NOT NULL,
           sling_id VARCHAR(255) NOT NULL,
           FOREIGN KEY(challenge_id) REFERENCES challenges(id),
