@@ -16,7 +16,7 @@ export const removeFriendHelper = ({ user_id, friend_id }) => {
 
 export const fetchAllFriendsHelper = ({ user_id }) => {
   return `
-    SELECT u.id, u.email, u.username, u.clout, u.kills, u.deaths,
+    SELECT u.id, u.email, u.username, u.clout, u.kills, u.deaths
     FROM users AS u
       INNER JOIN friends AS f
       ON (u.id=f.friend_id)
