@@ -13,7 +13,6 @@ router
   .route("/")
   .get(fetchOpenDuelController)
   .post(addOpenDuelController)
-  .delete(removeOpenDuelController)
-  .put(updateOpenDuelController);
+  .delete(removeOpenDuelController);
 
 export default router;
