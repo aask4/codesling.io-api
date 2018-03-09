@@ -12,8 +12,8 @@ const rooms = new Rooms(io);
 
 io.on('connection', (client) => {
   success('client connected');
-  const { roomId } = client.handshake.query;
-  const room = rooms.findOrCreate(roomId || 'default');
+  const { roomId, title } = client.handshake.query;
+  const room = rooms.findOrCreate(roomId || 'default', title);
   client.join(room.get('id'));
 
   each(clientEvents, (handler, event) => {
