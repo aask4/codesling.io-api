@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-import { success } from './lib/log';
+import { success, error } from './lib/log';
 import {
   serverInitialState,
   serverChanged,
   serverLeave,
   serverRun,
   serverMessage,
+  serverDuelChat,
 } from './serverEvents';
 
 /**
@@ -59,8 +60,20 @@ const clientMessage = async ({ io, room }, payload) => {
   try {
     const { data } = await axios.post(`${url}/messages/`, payload);
     serverMessage({ io, room }, data);
-  } catch (e) {
-    success('error saving message to the database. e = ', e);
+  } catch (err) {
+    error('error saving message to the database. e = ', err);
+  }
+};
+
+const clientDuelChat = async ({ io, room }, payload) => {
+  success('clientDuelChat heard');
+  const url = process.env.REST_SERVER_URL;
+  try {
+    const { data } = await axios.get(`${url}/api/users/fetchUserInfo/${payload.id}`);
+    const message = data.rows[0].username + ': ' + payload.msg;
+    await serverDuelChat({ io, room }, message);
+  } catch (err) {
+    error('clientDuelChat event error: ', err)
   }
 };
 
@@ -70,6 +83,7 @@ const clientEmitters = {
   'client.disconnect': clientDisconnect,
   'client.run': clientRun,
   'client.message': clientMessage,
+  'client.duelChat': clientDuelChat,
 };
 
 export default clientEmitters;
