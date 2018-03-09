@@ -1,9 +1,7 @@
-const startingText =
-`function hello() {
-  console.log('hello!');
-}
+const startingText = func =>
+`function ${func}() {
 
-hello();
+}
 `;
 
 /**
@@ -17,12 +15,12 @@ export default class Rooms {
     this.store = new Map();
   }
 
-  findOrCreate(roomId) {
+  findOrCreate(roomId, title) {
     let room = this.store.get(roomId);
     if (!room) {
       room = new Map();
       room.set('id', roomId);
-      room.set('text', startingText);
+      room.set('text', startingText(title));
       this.store.set(roomId, room);
     }
     return room;
