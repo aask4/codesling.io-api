@@ -69,7 +69,7 @@ export const createUserTable = async () => {
       clout INT,
       kills INT,
       deaths INT,
-      CONSTRAINT users_pk 
+      CONSTRAINT users_pk
         PRIMARY KEY(id)
       )
       `
@@ -363,13 +363,9 @@ export const createOpenDuelsTable = async () => {
         CREATE TABLE IF NOT EXISTS openduels
         (
           duel_id SERIAL PRIMARY KEY,
-          challenger_id INT NOT NULL,
-          opponent_id INT,
           challenge_id INT NOT NULL,
           sling_id VARCHAR(255) NOT NULL,
-          FOREIGN KEY(challenge_id) REFERENCES challenges(id),
-          FOREIGN KEY(challenger_id) REFERENCES users(id),
-          FOREIGN KEY(opponent_id) REFERENCES users(id)
+          FOREIGN KEY(challenge_id) REFERENCES challenges(id)
         )
       `
     )

@@ -20,7 +20,6 @@ export const addOpenDuelController = async (req, res) => {
 export const fetchOpenDuelController = async (req, res) => {
   try {
     const {rows} = await fetchOpenDuelQuery(req.query);
-    console.log('fetchOpenDuelController >>>> ', rows)
     success('fetchOpenDuelController - successfully fetched open duel ', rows);
     return res.status(200).send(rows);
   } catch (err) {
