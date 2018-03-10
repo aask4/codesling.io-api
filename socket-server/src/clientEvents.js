@@ -8,7 +8,8 @@ import {
   serverRun,
   serverMessage,
   serverJoined,
-  serverDuelChat
+  serverDuelChat,
+  serverDuelUpdate
 } from './serverEvents';
 
 /**
@@ -82,6 +83,10 @@ const clientOpponent = async ({io, room}) => {
   console.log('WE ARE HERE WE ARE HERE')
   serverJoined({io, room});
 }
+const addopenDuels = async({io, room}) => {
+  console.log('inside of addopenDuels')
+  serverDuelUpdate({io, room});
+}
 
 const clientEmitters = {
   'client.ready': clientReady,
@@ -91,6 +96,7 @@ const clientEmitters = {
   'client.message': clientMessage,
   'client.opponent': clientOpponent,
   'client.duelChat': clientDuelChat,
+  'addOpenDuels': addopenDuels
 };
 
 export default clientEmitters;

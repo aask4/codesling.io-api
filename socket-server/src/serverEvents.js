@@ -60,3 +60,9 @@ export const serverDuelChat = ({ io, room }, message) => {
     .emit('server.duelChat', message);
 };
 
+export const serverDuelUpdate = ({io, room}) => {
+  io 
+    .in(room.get('id'))
+    .emit('updateOpenDuels', {message : 'do a pull request on all open dules!!!'})
+}
+
